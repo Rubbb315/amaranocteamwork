@@ -904,3 +904,13 @@ h2 {
   font-weight: 700;
   color: #35145f;
 }
+
+
+.page-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(53, 20, 95, 0.12);
+}
