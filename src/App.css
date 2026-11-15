@@ -875,3 +875,14 @@ button {
     font-size: 32px;
   }
 }
+
+
+
+
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #54258b;
+}
