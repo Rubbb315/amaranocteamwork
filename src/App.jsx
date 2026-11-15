@@ -1,3 +1,5 @@
+
+import { useState, useEffect } from 'react'
 import './App.css'
 
 const pages = [
@@ -23,16 +25,16 @@ const pages = [
     path: '/hy/remote-service-for-non-resident-clients',
     title: 'Ոչ ռեզիդենտ հաճախորդների հեռավար սպասարկում',
     image: 'https://www.evoca.am/images-cache/menu/1/17510033256067/780x585.png',
-    intro: 'Բանկ այցելելն այլևս պարտադիր չէ։ Անգամ եթե չեք բնակվում ՀՀ-ում, Evocabank-ի հետ Դուք կարող եք բացել հաշիվներ օնլայն եղանակով աշխարհի ցանկացած կետից և ցանկացած պահի։',
+    intro: 'Բանկ այցելելն այլևս պարտադիր չէ։ Evocabank-ի հետ կարող եք բացել հաշիվներ առցանց՝ աշխարհի ցանկացած կետից։',
   },
 ]
 
-function Header({ currentPath }) {
+function Header({ currentPath, navigate }) {
   return (
     <header className="site-header">
       <div className="top-header">
         <div className="header-inner">
-          <a className="logo" href={pages[0].path}>
+          <a className="logo" href={pages[0].path} onClick={(e) => navigate(e, pages[0].path)}>
             evo<span>ca</span>
           </a>
 
@@ -49,7 +51,7 @@ function Header({ currentPath }) {
           <div className="languages">
             <a className="selected" href="#">ՀԱՅ</a>
             <a href="#">ENG</a>
-            <a href="#">РУС</a>
+            <a href="#">РУՍ</a>
           </div>
         </div>
       </div>
@@ -79,6 +81,7 @@ function Header({ currentPath }) {
             <a
               className="account-link"
               href={pages[0].path}
+              onClick={(e) => navigate(e, pages[0].path)}
             >
               Հաշիվներ <span>⌄</span>
             </a>
@@ -89,6 +92,7 @@ function Header({ currentPath }) {
                   key={page.path}
                   className={currentPath === page.path ? 'active' : ''}
                   href={page.path}
+                  onClick={(e) => navigate(e, page.path)}
                 >
                   {page.title}
                 </a>
@@ -103,52 +107,6 @@ function Header({ currentPath }) {
         </nav>
       </div>
     </header>
-  )
-}
-
-function Footer() {
-  return (
-    <footer className="footer">
-      <div className="footer-main">
-        <div className="footer-brand">
-          <a className="logo footer-logo" href={pages[0].path}>
-            evo<span>ca</span>
-          </a>
-          <p>Բանկային ծառայություններ՝ նորովի։</p>
-        </div>
-
-        <div className="footer-column">
-          <h3>Բանկի մասին</h3>
-          <a href="#">Մեր մասին</a>
-          <a href="#">Ղեկավարություն</a>
-          <a href="#">Բաժնետերեր</a>
-          <a href="#">Հաշվետվություններ</a>
-        </div>
-
-        <div className="footer-column">
-          <h3>Օգտակար հղումներ</h3>
-          <a href="#">Հաճախ տրվող հարցեր</a>
-          <a href="#">Գաղտնիության քաղաքականություն</a>
-          <a href="#">Սակագներ</a>
-          <a href="#">Կայքի քարտեզ</a>
-        </div>
-
-        <div className="footer-column">
-          <h3>Կապ մեզ հետ</h3>
-          <a href="tel:+37410605555">+374 10 605555</a>
-          <a href="tel:8444">8444</a>
-          <p>ք. Երևան, Հանրապետության 44/2</p>
-        </div>
-      </div>
-
-      <div className="footer-bottom">
-        <p>
-          Evocabank-ը վերահսկվում է Հայաստանի Հանրապետության
-          Կենտրոնական բանկի կողմից։
-        </p>
-        <p>1990 - 2026 © ԲՈԼՈՐ ԻՐԱՎՈՒՆՔՆԵՐԸ ՊԱՇՏՊԱՆՎԱԾ ԵՆ</p>
-      </div>
-    </footer>
   )
 }
 
@@ -186,19 +144,16 @@ function SavingAccount() {
           <h3>Գումարի աճ</h3>
           <p>Հաշվիդ դրական մնացորդի նկատմամբ տոկոսները հաշվարկվում են ամեն օր։</p>
         </div>
-
         <div className="feature">
           <span className="feature-icon">◷</span>
           <h3>Միշտ հասանելիություն</h3>
           <p>Փոխանցիր գումարդ Evocabank-ում գործող քո այլ հաշվին և օգտագործիր։</p>
         </div>
-
         <div className="feature">
           <span className="feature-icon">∞</span>
           <h3>Ոչ մի սահմանափակում</h3>
           <p>Չկա պարտադիր ժամկետ կամ համալրման նվազագույն գումար։</p>
         </div>
-
         <div className="feature">
           <span className="feature-icon">₳</span>
           <h3>Նախընտրելի արժույթ</h3>
@@ -212,7 +167,7 @@ function SavingAccount() {
           'Բացման և համալրման նվազագույն գումար չկա։',
           'Գործարքի նվազագույն չափ չկա։',
           'Խնայելու պարտադիր ժամկետ չկա։',
-          'Հաշիվը կարող ես համալրել ցանկացած պահի՝ Evocabank-ում գործող քո այլ հաշվից։',
+          'Հաշիվը կարող ես համալրել ցանկացած պահի։',
         ]} />
       </Section>
 
@@ -230,12 +185,10 @@ function SavingAccount() {
           'Հաշվի բացման դիմում։',
           'Մեր պահանջով այլ փաստաթղթեր։',
         ]} />
-
         <h3 className="subheading">Երաշխավորված ավանդների սահմանաչափերը</h3>
         <p>
-          Համաձայն «Ֆիզիկական անձանց բանկային ավանդների հատուցումը
-          երաշխավորելու մասին» ՀՀ օրենքի՝ բանկում բացված խնայողական
-          հաշվի վրա գտնվող դրամական միջոցները համարվում են բանկային ավանդ։
+          Համաձայն ՀՀ օրենքի՝ բանկում բացված խնայողական հաշվի վրա
+          գտնվող դրամական միջոցները համարվում են բանկային ավանդ։
         </p>
         <List items={[
           'Միայն դրամային ավանդի երաշխավորված չափը 16 միլիոն դրամ է։',
@@ -245,13 +198,12 @@ function SavingAccount() {
 
       <Section title="Խնայողական հաշիվների սպասարկում">
         <p>
-          Հաշիվների սպասարկումն իրականացնում են մեր գլխամասային գրասենյակը
-          և մասնաճյուղերը։ Հաշիվների վարման սպասարկումն անվճար է։
-          Հաշվի չնվազող մնացորդի պահանջ սահմանված չէ։
+          Հաշիվների սպասարկումն իրականացնում են մեր գլխամասային
+          գրասենյակը և մասնաճյուղերը։ Հաշիվների վարման սպասարկումն անվճար է։
         </p>
         <List items={[
-          'Հաշվի անկանխիկ համալրում՝ փոխանցում Evocabank-ում գործող քո այլ բանկային հաշիվներից։',
-          'Հաշվից անկանխիկ ելքագրում՝ փոխանցում դեպի Evocabank-ում գործող քո այլ բանկային հաշիվներ։',
+          'Հաշվի անկանխիկ համալրում։',
+          'Հաշվից անկանխիկ ելքագրում։',
           'Բանկային հաշիվներով արտարժույթի փոխարկում։',
         ]} />
       </Section>
@@ -259,7 +211,7 @@ function SavingAccount() {
       <Section title="Հաշիվ բացելու ընթացակարգ">
         <List items={[
           'Հաշիվը կարող ես բացել դրամով, դոլարով և եվրոյով։',
-          'Խնայողական հաշիվները կարող ես բացել ինչպես մասնաճյուղում, այնպես էլ հեռակառավարման համակարգերի միջոցով։',
+          'Հաշիվը կարող ես բացել մասնաճյուղում կամ հեռակառավարման համակարգերով։',
           'Փաստաթղթերի ստուգումից հետո հաշիվը բացվում է 1 աշխատանքային օրվա ընթացքում։',
         ]} />
       </Section>
@@ -274,18 +226,17 @@ function AccountOpening() {
         <h3 className="subheading">Անհրաժեշտ փաստաթղթեր</h3>
         <List items={[
           'Հաշվի բացման դիմում՝ մեր ձևանմուշի համաձայն։',
-          'Անձնագիր և սոցիալական քարտ կամ այն չունենալու մասին տեղեկանք, կամ միայն նույնականացման քարտ։',
+          'Անձնագիր և սոցիալական քարտ կամ նույնականացման քարտ։',
           'Մեր պահանջով այլ փաստաթղթեր։',
         ]} />
 
         <h3 className="subheading">Հաշիվ բացելու ընթացակարգ</h3>
         <List items={[
           'Ընթացիկ հաշիվ կարող ես բացել դրամով, դոլարով, եվրոյով, ռուբլով, կանադական դոլարով, ֆրանկով և ֆունտ ստեռլինգով։',
-          'Մեր աշխատակիցները կտեղեկացնեն հաշվի բացման և սպասարկման պայմանների, սակագների ու պահանջվող փաստաթղթերի մասին։',
+          'Մեր աշխատակիցները կտեղեկացնեն հաշվի բացման և սպասարկման պայմանների մասին։',
           'Լրացնում ես դիմում և ներկայացնում պահանջվող փաստաթղթերը։',
           'Բանկը կարող է պահանջել լրացուցիչ փաստաթղթեր։',
           'Փաստաթղթերի ստուգումից հետո հաշիվը բացվում է 1 աշխատանքային օրվա ընթացքում։',
-          'Հաշիվները կարող ես բացել մասնաճյուղում կամ հեռակառավարման համակարգերի միջոցով։',
         ]} />
       </Section>
 
@@ -293,7 +244,6 @@ function AccountOpening() {
         <p>
           Բանկային հաշիվների սպասարկումն իրականացնում են գլխամասային
           գրասենյակը և մասնաճյուղերը՝ աշխատանքային օրերին ժամը 9:30-17:00։
-          Բանկային հաշիվների վարման սպասարկումն անվճար է։
         </p>
         <List items={[
           'Բացված հաշվին մուտքագրել դրամական միջոցներ։',
@@ -322,7 +272,7 @@ function MetalAccounts() {
 
       <Section title="Հաշիվներով իրականացվող գործառնություններ">
         <List items={[
-          'Հաշվի համալրում՝ բանկից անկանխիկ ոսկի գնելու և այն հաշվին մուտքագրելու միջոցով։',
+          'Հաշվի համալրում՝ բանկից անկանխիկ ոսկի գնելու միջոցով։',
           'Այլ անձի մետաղական հաշվից անկանխիկ ոսկի փոխանցելու միջոցով համալրում։',
           'Հաշվին առկա անկանխիկ ոսկին բանկին վաճառելու միջոցով ելքագրում։',
           'Անկախիկ ոսկու փոխանցում նույն կամ այլ բանկում գործող մետաղական հաշվին։',
@@ -333,7 +283,7 @@ function MetalAccounts() {
       <Section title="Հաշիվ բացելու համար անհրաժեշտ փաստաթղթեր">
         <List items={[
           'Դիմում՝ մեր ձևանմուշի համաձայն։',
-          'Անձնագիր և սոցիալական քարտ կամ այն չունենալու մասին տեղեկանք, կամ միայն նույնականացման քարտ։',
+          'Անձնագիր և սոցիալական քարտ կամ նույնականացման քարտ։',
           'Մեր պահանջով այլ փաստաթղթեր։',
         ]} />
         <p className="notice">
@@ -351,37 +301,35 @@ function NonResident() {
       <div className="intro-text">
         24/7 անձնական մենեջեր, ֆինանսական ծառայությունների հասանելիություն
         աշխարհի ցանկացած կետից, փաստաթղթերի անվճար առաքում Ձեր գտնվելու վայր։
-        Բոլոր մանրուքները մտածված են, որ Դուք խնայեք Ձեր ժամանակը։
         Ուղարկեք փաստաթղթերը, անցեք տեսազանգով նույնականացում և բացեք
         Ձեր հաշիվը՝ առանց Բանկ այցելելու։
       </div>
 
       <Section title="ԱՆՀՐԱԺԵՇՏ ՏԵՂԵԿԱՏՎՈՒԹՅՈՒՆ">
         <h3 className="subheading">Առավելություններ</h3>
-
         <div className="feature-grid">
           <div className="feature">
             <h3>Prime կարգավիճակ Բանկում</h3>
-            <p>Բացառիկ արտոնություններ, առաջնահերթ սպասարկում և ժամանակի խնայում։</p>
+            <p>Բացառիկ արտոնություններ և առաջնահերթ սպասարկում։</p>
           </div>
           <div className="feature">
-            <h3>Անհատական մենեջեր / Անձնական օգնական</h3>
+            <h3>Անհատական մենեջեր</h3>
             <p>24/7 աջակցություն ֆինանսական ցանկացած հարցում։</p>
           </div>
           <div className="feature">
             <h3>Հեռավար սպասարկում</h3>
-            <p>Ծառայությունների հասանելիություն առցանց՝ աշխարհի ցանկացած կետից։</p>
+            <p>Ծառայությունների հասանելիություն առցանց։</p>
           </div>
           <div className="feature">
             <h3>Փաստաթղթերի անվճար առաքում</h3>
-            <p>Առաքում անմիջապես Ձեր գտնվելու վայր՝ Ձեզ հարմար պահի։</p>
+            <p>Առաքում անմիջապես Ձեր գտնվելու վայր։</p>
           </div>
         </div>
 
         <h3 className="subheading">Ֆիզիկական անձանց հաշվի բացման պայմաններ</h3>
         <List items={[
-          'Հանդիսանում են ՀՀ-ում գտնվող անշարժ գույքի սեփականատեր և ունեն սեփականության իրավունքի գրանցման վկայական։',
-          'Պատրաստ են ներդնել նվազագույնը 6 ամիս ժամկետով՝ առնվազն 20 000 ԱՄՆ դոլար, 20 000 Եվրո, 1 500 000 ՌԴ ռուբլի կամ 10 000 000 ՀՀ դրամ համարժեք ավանդ։',
+          'Հանդիսանում են ՀՀ-ում գտնվող անշարժ գույքի սեփականատեր։',
+          'Պատրաստ են ներդնել առնվազն 20 000 ԱՄՆ դոլար կամ համարժեք գումար։',
           'ՀՀ-ում գրանցված են որպես անհատ ձեռնարկատեր։',
           'Հանդիսանում են ՀՀ-ում գրանցված իրավաբանական անձի մասնակից կամ բաժնետեր։',
         ]} />
@@ -399,16 +347,9 @@ function NonResident() {
         <List items={[
           'Կանոնադրություն կամ դրան փոխարինող այլ փաստաթուղթ։',
           'Պետական ռեգիստրի գրանցման վկայական։',
-          'Հարկ վճարողի հաշվառման համարը, եթե այն բացակայում է վկայականում։',
+          'Հարկ վճարողի հաշվառման համարը։',
           'Գործադիր մարմնի ղեկավարի և գլխավոր հաշվապահի անձը հաստատող փաստաթղթեր։',
           'Հաշվետերերի անձնագրեր կամ նույնականացման քարտեր։',
-        ]} />
-        <h3 className="subheading">Շահառուների համար անհրաժեշտ է</h3>
-        <List items={[
-          'Ֆիզիկական անձ շահառուի անձնագրի կամ նույնականացման քարտի պատճեն։',
-          'Իրավաբանական անձ շահառուի գրանցման փաստաթղթերի պատճեններ։',
-          'Ընկերության վերջին մեկ տարվա ֆինանսական հաշվետվություններ և աուդիտորական եզրակացություն։',
-          'Լիցենզիա, եթե ընկերության գործունեությունը պահանջում է։',
         ]} />
       </Section>
 
@@ -420,18 +361,13 @@ function NonResident() {
             <p><span>Տարեկան սպասարկում</span><strong>250,000 դրամ</strong></p>
             <p><span>Փակման վճար</span><strong>0 դրամ</strong></p>
             <p><span>Անկանխիկ մուտքագրում</span><strong>0.5%</strong></p>
-            <p><span>Հաճախորդների փոխանցումներ</span><strong>0.5%</strong></p>
-            <small>USD, EUR, RUB, AED, GBP, CHF, CNY, CAD</small>
           </div>
-
           <div className="tariff-card">
             <h3>Իրավաբանական անձանց համար</h3>
             <p><span>Հաշվի բացում</span><strong>100,000 դրամ</strong></p>
             <p><span>Տարեկան սպասարկում</span><strong>500,000 դրամ</strong></p>
             <p><span>Փակման վճար</span><strong>0 դրամ</strong></p>
             <p><span>Անկանխիկ մուտքագրում</span><strong>0.5%</strong></p>
-            <p><span>Հաճախորդների փոխանցումներ</span><strong>0.5%</strong></p>
-            <small>USD, EUR, RUB, AED, GBP, CHF, CNY, CAD</small>
           </div>
         </div>
       </Section>
@@ -441,33 +377,21 @@ function NonResident() {
           <span>01</span>
           <div>
             <h3>Փաստաթղթերի ուղարկում</h3>
-            <p>Ուղարկեք անհրաժեշտ փաստաթղթերը՝ <a href="mailto:primeonline@evoca.am">primeonline@evoca.am</a> հասցեին։</p>
+            <p>Ուղարկեք անհրաժեշտ փաստաթղթերը՝ primeonline@evoca.am հասցեին։</p>
           </div>
         </div>
-
         <div className="step">
           <span>02</span>
           <div>
             <h3>Առցանց նույնականացում տեսազանգով</h3>
-            <p>
-              Փաստաթղթերի ամբողջական փաթեթը ստանալուց հետո Բանկը
-              կտեղեկացնի տեսազանգի անցկացման կարգի մասին։
-              Դրական որոշումից հետո անհրաժեշտ է այլ բանկում գործող
-              հաշվից առնվազն 50 ԱՄՆ դոլար փոխանցել Evocabank-ում
-              Ձեր անունով բացված հաշվին։
-            </p>
+            <p>Բանկը կտեղեկացնի տեսազանգի անցկացման կարգի մասին։</p>
           </div>
         </div>
-
         <div className="step">
           <span>03</span>
           <div>
             <h3>Կապ մեզ հետ</h3>
-            <p>
-              Հարցերի դեպքում կարող եք գրել
-              <a href="mailto:primeonline@evoca.am"> primeonline@evoca.am</a>
-              հասցեին կամ զանգահարել +374 33 625555 հեռախոսահամարին։
-            </p>
+            <p>Հարցերի դեպքում կարող եք գրել primeonline@evoca.am հասցեին։</p>
           </div>
         </div>
       </Section>
@@ -475,8 +399,70 @@ function NonResident() {
   )
 }
 
+function Footer({ navigate }) {
+  return (
+    <footer className="footer">
+      <div className="footer-main">
+        <div className="footer-brand">
+          <a className="logo footer-logo" href={pages[0].path} onClick={(e) => navigate(e, pages[0].path)}>
+            evo<span>ca</span>
+          </a>
+          <p>Բանկային ծառայություններ՝ նորովի։</p>
+        </div>
+
+        <div className="footer-column">
+          <h3>Բանկի մասին</h3>
+          <a href="#">Մեր մասին</a>
+          <a href="#">Ղեկավարություն</a>
+          <a href="#">Բաժնետերեր</a>
+          <a href="#">Հաշվետվություններ</a>
+        </div>
+
+        <div className="footer-column">
+          <h3>Օգտակար հղումներ</h3>
+          <a href="#">Հաճախ տրվող հարցեր</a>
+          <a href="#">Գաղտնիության քաղաքականություն</a>
+          <a href="#">Սակագներ</a>
+          <a href="#">Կայքի քարտեզ</a>
+        </div>
+
+        <div className="footer-column">
+          <h3>Կապ մեզ հետ</h3>
+          <a href="tel:+37410605555">+374 10 605555</a>
+          <a href="tel:8444">8444</a>
+          <p>ք. Երևան, Հանրապետության 44/2</p>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <p>Evocabank-ը վերահսկվում է Հայաստանի Հանրապետության Կենտրոնական բանկի կողմից։</p>
+        <p>1990 - 2026 © ԲՈԼՈՐ ԻՐԱՎՈՒՆՔՆԵՐԸ ՊԱՇՏՊԱՆՎԱԾ ԵՆ</p>
+      </div>
+    </footer>
+  )
+}
+
 function App() {
-  const currentPath = window.location.pathname
+  const [currentPath, setCurrentPath] = useState(
+    window.location.pathname.replace(/\/$/, '') || pages[0].path
+  )
+
+  useEffect(() => {
+    function handlePopState() {
+      setCurrentPath(window.location.pathname.replace(/\/$/, '') || pages[0].path)
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
+
+  function navigate(event, path) {
+    if (event) event.preventDefault()
+    window.history.pushState({}, '', path)
+    setCurrentPath(path)
+    window.scrollTo(0, 0)
+  }
+
   const page = pages.find((item) => item.path === currentPath) || pages[0]
 
   function renderContent() {
@@ -488,13 +474,13 @@ function App() {
 
   return (
     <>
-      <Header currentPath={currentPath} />
+      <Header currentPath={currentPath} navigate={navigate} />
 
       <main className="page-container">
         <div className="breadcrumb">
-          <a href="#">Գլխավոր</a>
+          <a href={pages[0].path} onClick={(e) => navigate(e, pages[0].path)}>Գլխավոր</a>
           <span>/</span>
-          <a href={pages[0].path}>Հաշիվներ</a>
+          <a href={pages[0].path} onClick={(e) => navigate(e, pages[0].path)}>Հաշիվներ</a>
           <span>/</span>
           <span>{page.title}</span>
         </div>
@@ -504,7 +490,6 @@ function App() {
             <h1>{page.title}</h1>
             <p>{page.intro}</p>
           </div>
-
           <div className="hero-image">
             <img src={page.image} alt={page.title} />
           </div>
@@ -517,11 +502,7 @@ function App() {
             <div className="document-row">
               <span className="pdf-icon">PDF</span>
               <p>Համալիր բանկային ծառայությունների մատուցման պայմաններ</p>
-              <a
-                href="https://www.evoca.am/files/global_files/1/provision-terms-for-general-banking-services-arm.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="https://www.evoca.am/files/global_files/1/provision-terms-for-general-banking-services-arm.pdf" target="_blank" rel="noreferrer">
                 Դիտել →
               </a>
             </div>
@@ -537,10 +518,7 @@ function App() {
               </p>
             </div>
             <div className="qr-area">
-              <img
-                src="https://www.evoca.am/images-cache/banners/1/16136269557179/101x101.png"
-                alt="QR code"
-              />
+              <img src="https://www.evoca.am/images-cache/banners/1/16136269557179/101x101.png" alt="QR code" />
               <p>Ներբեռնել հավելվածները</p>
             </div>
           </section>
@@ -554,6 +532,7 @@ function App() {
                 key={item.path}
                 href={item.path}
                 className={item.path === page.path ? 'current' : ''}
+                onClick={(e) => navigate(e, item.path)}
               >
                 {item.title}
                 <span>→</span>
@@ -563,7 +542,7 @@ function App() {
         </div>
       </main>
 
-      <Footer />
+      <Footer navigate={navigate} />
     </>
   )
 }
