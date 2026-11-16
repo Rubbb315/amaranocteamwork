@@ -1,4 +1,4 @@
-import Anhat from "./pages/anhat/anhat.jsx";
+import Anhat from "./pages/biznes/biznes.jsx";
 
 function App() {
     return (
