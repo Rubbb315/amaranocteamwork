@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@300;400;500;600;700;800&display=swap');
+
+.mermasin {
+    --purple: #7650c9;
+    --light: #f5f2fa;
+    font-family: 'Noto Sans Armenian', sans-serif;
+    color: #25212d;
+    overflow: hidden;
+}
+
+.mermasin * {
+    box-sizing: border-box;
+}
+
+.mer-hero {
+    min-height: 650px;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    padding: 80px 10%;
+    position: relative;
+}
+
+.mer-hero-content {
+    max-width: 650px;
+    z-index: 2;
+}
+
+.mer-hero-content>span,
+.mer-label {
+    color: var(--purple);
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.mer-hero h1 {
+    font-size: clamp(50px, 7vw, 90px);
+    line-height: 1.25;
+    margin: 25px 0;
+}
+
+.mer-hero h1 span,
+.mer-about h2 span {
+    color: var(--purple);
+}
+
+.mer-hero-content p {
+    color: #77717f;
+    line-height: 2;
+    max-width: 430px;
+}
+
+.mer-hero-content a {
+    display: inline-block;
+    background: var(--purple);
+    color: white;
+    padding: 16px 28px;
+    border-radius: 30px;
+    margin-top: 30px;
+    text-decoration: none;
+}
+
+.mer-hero-circle {
+    position: absolute;
+    right: 10%;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a88be8, #5430a3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, .5);
+    font-size: 250px;
+    font-weight: 800;
+}
+
+.mer-about {
+    padding: 100px 10%;
+}
+
+.mer-about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    margin-top: 50px;
+}
+
+.mer-about h2 {
+    font-size: 45px;
+    line-height: 1.5;
+}
+
+.mer-about-content p {
+    color: #77717f;
+    line-height: 2;
+    margin-bottom: 20px;
+}
+
+.mer-vision {
+    padding: 100px 10%;
+    background: var(--light);
+}
+
+.mer-vision-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.mer-vision-content>div {
+    background: white;
+    padding: 45px;
+    border-radius: 12px;
+}
+
+.mer-vision-content>div:last-child {
+    background: var(--purple);
+    color: white;
+}
+
+.mer-vision-content h2 {
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.mer-vision-content p {
+    line-height: 2;
+    color: #77717f;
+}
+
+.mer-vision-content>div:last-child p {
+    color: #eee6ff;
+}
+
+.mer-history {
+    padding: 100px 10%;
+}
+
+.mer-history>h2 {
+    font-size: 50px;
+    margin: 40px 0 60px;
+}
+
+.mer-timeline {
+    border-left: 2px solid #e5dff0;
+    padding-left: 40px;
+}
+
+.mer-timeline>div {
+    margin-bottom: 45px;
+    position: relative;
+}
+
+.mer-timeline>div::before {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    background: var(--purple);
+    border-radius: 50%;
+    left: -48px;
+    top: 8px;
+}
+
+.mer-timeline h3 {
+    color: var(--purple);
+    font-size: 32px;
+}
+
+.mer-timeline p {
+    color: #77717f;
+    line-height: 1.8;
+}
+
+.mer-values {
+    background: var(--light);
+    padding: 100px 10%;
+}
+
+.mer-values>h2 {
+    font-size: 45px;
+    margin: 40px 0 50px;
+}
+
+.mer-values-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.mer-values-content>div {
+    background: white;
+    padding: 35px;
+    min-height: 240px;
+    border-radius: 12px;
+    transition: .3s;
+}
+
+.mer-values-content>div:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px #30205012;
+}
+
+.mer-values-content span {
+    color: var(--purple);
+    font-weight: 700;
+}
+
+.mer-values-content h3 {
+    margin-top: 40px;
+}
+
+.mer-values-content p {
+    color: #77717f;
+    line-height: 1.8;
+}
+
+.mer-social {
+    background: var(--purple);
+    color: white;
+    padding: 100px 10%;
+}
+
+.mer-social>span {
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+.mer-social h2 {
+    font-size: 55px;
+    max-width: 700px;
+    margin: 35px 0;
+}
+
+.mer-social p {
+    max-width: 600px;
+    line-height: 2;
+    color: #eee6ff;
+}
+
+@media (max-width: 768px) {
+    .mer-hero {
+        padding: 70px 7%;
+    }
+
+    .mer-hero-circle {
+        right: -200px;
+        opacity: .2;
+    }
+
+    .mer-about,
+    .mer-vision,
+    .mer-history,
+    .mer-values,
+    .mer-social {
+        padding: 70px 7%;
+    }
+
+    .mer-about-content,
+    .mer-vision-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .mer-values-content {
+        grid-template-columns: 1fr;
+    }
+
+    .mer-about h2,
+    .mer-values>h2 {
+        font-size: 35px;
+    }
+
+    .mer-social h2 {
+        font-size: 38px;
+    }
+}
