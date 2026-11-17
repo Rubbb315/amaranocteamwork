@@ -1,4 +1,4 @@
-import Anhat from "./pages/akntartayinvcha/akntartayinvcha.jsx";
+import Anhat from "./pages/anhat/anhat.jsx";
 
 function App() {
     return (
